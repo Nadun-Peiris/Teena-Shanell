@@ -11,7 +11,10 @@ export default function IntroAnimation() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      const isMobile = window.matchMedia("(max-width: 640px)").matches;
       const tl = gsap.timeline();
+      const startLetterSpacing = isMobile ? "0.45em" : "1.5em";
+      const endLetterSpacing = isMobile ? "0.18em" : "0.3em";
 
       gsap.set([leftPanelRef.current, rightPanelRef.current], { width: "50%" });
 
@@ -19,13 +22,13 @@ export default function IntroAnimation() {
         textRef.current,
         {
           opacity: 0,
-          letterSpacing: "1.5em",
+          letterSpacing: startLetterSpacing,
           filter: "blur(15px)",
           scale: 0.9,
         },
         {
           opacity: 1,
-          letterSpacing: "0.3em",   // reduced from 0.6em — prevents overflow on narrow phones
+          letterSpacing: endLetterSpacing,
           filter: "blur(0px)",
           scale: 1,
           duration: 2,
@@ -91,7 +94,7 @@ export default function IntroAnimation() {
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-6">
         <h1
           ref={textRef}
-          className="font-playfair text-[7vw] sm:text-3xl md:text-5xl uppercase text-[#1A1A1A] text-center"
+          className="font-playfair whitespace-nowrap text-[clamp(2rem,10vw,3.25rem)] sm:text-3xl md:text-5xl uppercase text-[#1A1A1A] text-center"
         >
           Teena Shanell
         </h1>
