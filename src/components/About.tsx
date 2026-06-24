@@ -64,7 +64,7 @@ export default function About() {
           <div className="w-full md:w-1/2 lg:w-5/12 h-[60vh] md:h-[90vh] relative rounded-sm overflow-hidden md:sticky md:top-10">
             <img
               ref={imageRef}
-              src="/photos 1/9.JPG" // Placeholder for her best close-up portrait
+              src="/about/img1.webp" // Placeholder for her best close-up portrait
               alt="Teena Shanell Portrait"
               className="w-full h-full object-cover grayscale-[10%]"
             />

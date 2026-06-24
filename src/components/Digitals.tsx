@@ -16,9 +16,9 @@ const MEASUREMENTS = [
 ];
 
 const DIGITAL_IMAGES = [
-  { src: "/photos 1/9.JPG", alt: "Teena Shanell - Front Profile" },
-  { src: "/photos 1/9.JPG", alt: "Teena Shanell - Full Body" },
-  { src: "/photos 1/9.JPG", alt: "Teena Shanell - Side Profile" },
+  { src: "/digitals/img1.webp", alt: "Teena Shanell - Face Profile" },
+  { src: "/digitals/img2.webp", alt: "Teena Shanell - Full Body" },
+  { src: "/digitals/img3.webp", alt: "Teena Shanell - Side Profile" },
 ];
 
 export default function Digitals() {

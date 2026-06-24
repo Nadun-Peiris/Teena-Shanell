@@ -9,15 +9,15 @@ import { useGSAP } from "@gsap/react";
 const CATEGORIES = ["All", "Editorial", "Commercial", "Bridal"];
 
 const PORTFOLIO_ITEMS = [
-  { id: 1, category: "Editorial", src: "/photos 1/1.JPG", title: "Vogue Cover Story" },
-  { id: 2, category: "Bridal", src: "/photos 1/2.JPG", title: "Sutra Collection" },
-  { id: 3, category: "Commercial", src: "/photos 1/3.JPG", title: "La Rocher Campaign" },
-  { id: 4, category: "Editorial", src: "/photos 1/4.JPG", title: "Blanche Haute Culture" },
-  { id: 5, category: "Commercial", src: "/photos 1/5.JPG", title: "Rivera Ceylon" },
-  { id: 6, category: "Bridal", src: "/photos 1/6.JPG", title: "Traditional Kandyan" },
-  { id: 7, category: "Editorial", src: "/photos 1/7.JPG", title: "Elegant Magazine" },
-  { id: 8, category: "Bridal", src: "/photos 1/8.JPG", title: "Vows & Veils" },
-  { id: 9, category: "Commercial", src: "/photos 1/9.JPG", title: "Luxe Cosmetics" },
+  { id: 1, category: "Editorial", src: "/portfoliogrid/editorial/img1.webp"},
+  { id: 2, category: "Bridal", src: "/photos 1/2.JPG"},
+  { id: 3, category: "Commercial", src: "/portfoliogrid/commercial/img1.webp"},
+  { id: 4, category: "Editorial", src: "/portfoliogrid/editorial/img2.webp"},
+  { id: 5, category: "Commercial", src: "/portfoliogrid/commercial/img2.webp"},
+  { id: 6, category: "Bridal", src: "/portfoliogrid/bridal/img1.webp"},
+  { id: 7, category: "Editorial", src: "/portfoliogrid/editorial/img3.webp"},
+  { id: 8, category: "Bridal", src: "/photos 1/8.JPG"},
+  { id: 9, category: "Commercial", src: "/portfoliogrid/commercial/img3.webp"},
 ];
 
 type PortfolioItem = (typeof PORTFOLIO_ITEMS)[number];
@@ -91,20 +91,11 @@ export default function PortfolioGrid() {
     <div className="group relative overflow-hidden rounded-sm bg-foreground/5 cursor-pointer w-full h-full transform-gpu will-change-transform">
       <img
         src={item.src}
-        alt={item.title}
         // 3. Added decoding="async" for smoother scrolling and loading
         decoding="async"
         loading="lazy"
         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 will-change-transform"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 flex flex-col justify-end p-6 md:p-8 pointer-events-none">
-        <p className="font-montserrat text-[9px] uppercase tracking-[0.4em] text-gold mb-2 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 delay-100">
-          {item.category}
-        </p>
-        <h3 className="font-playfair text-2xl md:text-3xl text-white translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 delay-150">
-          {item.title}
-        </h3>
-      </div>
     </div>
   );
 
