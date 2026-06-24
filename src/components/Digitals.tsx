@@ -7,11 +7,11 @@ import { useGSAP } from "@gsap/react";
 
 const MEASUREMENTS = [
   { label: "Height", value: "173cm" },
-  { label: "Bust", value: "32\"" },
-  { label: "Waist", value: "24\"" },
-  { label: "Hips", value: "35\"" },
+  { label: "Bust", value: "37\"" },
+  { label: "Waist", value: "33\"" },
+  { label: "Hips", value: "41.5\"" },
   { label: "Shoe", value: "39 EU" },
-  { label: "Hair", value: "Dark Brown" },
+  { label: "Hair", value: "Dark Black" },
   { label: "Eyes", value: "Brown" },
 ];
 

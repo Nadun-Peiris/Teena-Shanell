@@ -10,13 +10,13 @@ const CATEGORIES = ["All", "Editorial", "Commercial", "Bridal"];
 
 const PORTFOLIO_ITEMS = [
   { id: 1, category: "Editorial", src: "/portfoliogrid/editorial/img1.webp"},
-  { id: 2, category: "Bridal", src: "/photos 1/2.JPG"},
+  { id: 2, category: "Bridal", src: "/portfoliogrid/bridal/img1.webp"},
   { id: 3, category: "Commercial", src: "/portfoliogrid/commercial/img1.webp"},
   { id: 4, category: "Editorial", src: "/portfoliogrid/editorial/img2.webp"},
   { id: 5, category: "Commercial", src: "/portfoliogrid/commercial/img2.webp"},
-  { id: 6, category: "Bridal", src: "/portfoliogrid/bridal/img1.webp"},
+  { id: 6, category: "Bridal", src: "/portfoliogrid/bridal/img2.webp"},
   { id: 7, category: "Editorial", src: "/portfoliogrid/editorial/img3.webp"},
-  { id: 8, category: "Bridal", src: "/photos 1/8.JPG"},
+  { id: 8, category: "Bridal", src: "/portfoliogrid/bridal/img3.webp"},
   { id: 9, category: "Commercial", src: "/portfoliogrid/commercial/img3.webp"},
 ];
 
