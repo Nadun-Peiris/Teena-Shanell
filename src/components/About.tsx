@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,7 +10,7 @@ import Link from "next/link";
 export default function About() {
   const containerRef = useRef<HTMLDivElement>(null);
   const textContainerRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
+  const imageRef = useRef<HTMLImageElement | null>(null);
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -54,7 +55,7 @@ export default function About() {
   return (
     <section 
       ref={containerRef} 
-      className="relative w-full bg-background text-foreground pb-24 sm:pb-32 md:pb-40"
+      className="relative w-full bg-background py-20 text-foreground sm:py-32 md:py-40"
       id="about"
     >
       <div className="mx-auto max-w-[1800px] px-5 sm:px-8 md:px-16 lg:px-24">
@@ -62,11 +63,13 @@ export default function About() {
           
           {/* LEFT COLUMN: Sticky Portrait */}
           <div className="w-full md:w-1/2 lg:w-5/12 h-[60vh] md:h-[90vh] relative rounded-sm overflow-hidden md:sticky md:top-10">
-            <img
+            <Image
               ref={imageRef}
-              src="/about/img1.webp" // Placeholder for her best close-up portrait
+              src="/about/img1.webp"
               alt="Teena Shanell Portrait"
-              className="w-full h-full object-cover grayscale-[10%]"
+              fill
+              sizes="(max-width: 768px) 100vw, 42vw"
+              className="h-full w-full object-cover grayscale-[10%]"
             />
             {/* Elegant inner border */}
             <div className="absolute inset-4 border border-white/20 pointer-events-none" />
@@ -75,7 +78,7 @@ export default function About() {
           {/* RIGHT COLUMN: Scrolling Biography */}
           <div 
             ref={textContainerRef} 
-            className="w-full md:w-1/2 lg:w-7/12 flex flex-col justify-center py-10 md:py-32"
+            className="flex w-full flex-col justify-center py-0 md:w-1/2 md:py-32 lg:w-7/12"
           >
             <div className="mb-12 md:mb-16">
               <p className="about-text font-montserrat text-[10px] md:text-xs uppercase tracking-[0.5em] text-gold mb-6">

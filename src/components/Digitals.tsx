@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -27,6 +28,7 @@ export default function Digitals() {
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
+    const isDesktop = window.innerWidth >= 768;
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -52,20 +54,20 @@ export default function Digitals() {
     // Staggered Parallax for Images
     const images = gsap.utils.toArray<HTMLElement>(".digital-image");
     images.forEach((img, index) => {
-      // The center image gets a different y-offset for asymmetry
-      const yOffset = index === 1 ? 80 : 40; 
+      const initialOffset = isDesktop ? (index === 1 ? 130 : 90) : 0;
+      const finalOffset = isDesktop && index === 1 ? 40 : 0;
       
       gsap.fromTo(
         img,
-        { opacity: 0, y: yOffset + 50 },
+        { opacity: 0, y: initialOffset },
         {
           scrollTrigger: {
             trigger: imagesRef.current,
             start: "top 80%",
           },
           opacity: 1,
-          y: index === 1 ? 40 : 0, // Keep center image pushed down slightly at rest on desktop
-          duration: 1.2,
+          y: finalOffset,
+          duration: isDesktop ? 1.2 : 0.8,
           delay: index * 0.15,
           ease: "power3.out",
         }
@@ -76,29 +78,29 @@ export default function Digitals() {
   return (
     <section 
       ref={containerRef} 
-      className="relative w-full bg-background text-foreground py-24 sm:py-32 overflow-hidden"
+      className="relative w-full overflow-hidden bg-background pt-20 pb-8 text-foreground sm:py-32"
       id="digitals"
     >
       <div className="mx-auto max-w-[1800px] px-5 sm:px-8 md:px-16 lg:px-24">
         
         {/* TOP SECTION: Massive Title & Horizontal Measurements */}
-        <div className="flex flex-col items-center text-center mb-16 md:mb-24">
-          <p className="font-montserrat text-[10px] md:text-xs uppercase tracking-[0.5em] text-gold mb-6 digitals-title">
+        <div className="mb-14 flex flex-col items-center text-center sm:mb-16 md:mb-24">
+          <p className="digitals-title mb-5 font-montserrat text-[9px] uppercase tracking-[0.38em] text-gold sm:text-[10px] sm:tracking-[0.5em] md:mb-6 md:text-xs">
             Raw & Unedited
           </p>
           
-          <h2 className="font-playfair text-[15vw] md:text-[10vw] uppercase tracking-tighter leading-[0.8] mb-12 digitals-title text-foreground">
+          <h2 className="digitals-title mb-8 font-playfair text-[18vw] uppercase leading-[0.84] tracking-tighter text-foreground sm:text-[15vw] md:mb-12 md:text-[10vw]">
             Digitals
           </h2>
 
           {/* Minimalist Horizontal ID Bar */}
-          <div className="w-full max-w-5xl flex flex-wrap justify-center items-center gap-x-6 gap-y-4 md:gap-x-12 border-y border-foreground/10 py-6 md:py-8">
+          <div className="flex w-full max-w-5xl flex-wrap justify-center gap-x-4 gap-y-3 border-y border-foreground/10 py-5 sm:items-center sm:gap-x-6 sm:gap-y-4 md:gap-x-12 md:py-8">
             {MEASUREMENTS.map((stat, i) => (
-              <div key={i} className="measurement-item flex items-center gap-2">
-                <span className="font-montserrat text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-foreground/50">
+              <div key={i} className="measurement-item flex items-center gap-2 text-left">
+                <span className="font-montserrat text-[8px] uppercase tracking-[0.24em] text-foreground/50 sm:text-[9px] md:text-[10px] md:tracking-[0.3em]">
                   {stat.label}
                 </span>
-                <span className="font-montserrat text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium text-foreground">
+                <span className="font-montserrat text-[9px] uppercase tracking-[0.14em] text-foreground sm:text-[10px] md:text-xs md:tracking-[0.2em] md:font-medium">
                   {stat.value}
                 </span>
                 {/* Gold separator dot (hide on last item) */}
@@ -113,20 +115,21 @@ export default function Digitals() {
         {/* BOTTOM SECTION: 3-Column Staggered Grid */}
         <div 
           ref={imagesRef} 
-          className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 pb-10"
+          className="grid grid-cols-1 gap-6 sm:gap-5 sm:pb-10 md:grid-cols-3 md:gap-8"
         >
           {DIGITAL_IMAGES.map((img, i) => (
             <div 
               key={i} 
-              className={`digital-image relative w-full overflow-hidden rounded-sm bg-foreground/5 aspect-[3/4] md:aspect-[4/5] ${
-                i === 1 ? "md:mt-12" : "" // Native Tailwind stagger for the center image
+              className={`digital-image relative mx-auto w-full max-w-[34rem] overflow-hidden rounded-sm bg-foreground/5 aspect-[4/5] sm:aspect-[3/4] md:max-w-none md:aspect-[4/5] ${
+                i === 1 ? "md:mt-12" : ""
               }`}
             >
-              <img
+              <Image
                 src={img.src}
                 alt={img.alt}
-                className="w-full h-full object-cover grayscale-[15%] hover:grayscale-0 transition-all duration-700 hover:scale-105"
-                loading="lazy"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="h-full w-full object-cover grayscale-[15%] transition-all duration-700 hover:scale-105 hover:grayscale-0"
               />
             </div>
           ))}

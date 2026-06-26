@@ -2,13 +2,14 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import gsap from "gsap";
 
 const BARCODE_HEIGHTS = [16, 57, 3, 52, 68, 23, 4, 27, 84, 67, 72, 71];
 
 export default function HeroVogueFull() {
   // Added TypeScript types to the refs
-  const imageRef = useRef<HTMLImageElement>(null);
+  const imageRef = useRef<HTMLImageElement | null>(null);
   const rightSideRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -40,30 +41,33 @@ export default function HeroVogueFull() {
       {/* 1. FULL WIDTH IMAGE */}
       <div className="absolute inset-0 z-0">
         {/* Updated path to /hero.png for Next.js public folder */}
-        <img
+        <Image
           ref={imageRef}
           src="/hero.webp"
           alt="Teena Shanell"
-          className="w-full h-full object-cover object-[50%_20%] grayscale-[10%]"
+          fill
+          priority
+          sizes="100vw"
+          className="h-full w-full object-cover object-[58%_18%] grayscale-[10%] sm:object-[54%_20%] md:object-[50%_20%]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
       </div>
 
       {/* 2. EDITORIAL TEXT (Left Side) */}
-      <div className="relative z-10 h-full flex flex-col justify-end p-5 sm:p-8 md:p-24 pb-16 sm:pb-20">
+      <div className="relative z-10 flex h-full flex-col justify-end px-5 pb-24 pt-24 sm:px-8 sm:pb-20 md:p-24">
         <div className="max-w-4xl">
-          <p className="vogue-text font-montserrat text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.5em] uppercase text-gold mb-3 md:mb-4">
+          <p className="vogue-text mb-3 max-w-[18rem] font-montserrat text-[8px] uppercase tracking-[0.38em] text-gold sm:max-w-none sm:text-[9px] sm:tracking-[0.5em] md:mb-4 md:text-[10px]">
             Professional Fashion Muse — Sri Lanka
           </p>
 
-          <h1 className="vogue-text font-playfair text-[13vw] sm:text-6xl md:text-8xl lg:text-9xl text-white uppercase leading-[0.85] tracking-tighter mb-6 md:mb-8">
+          <h1 className="vogue-text mb-6 font-playfair text-[15vw] uppercase leading-[0.82] tracking-tight text-white sm:text-6xl sm:tracking-tighter md:mb-8 md:text-8xl lg:text-9xl">
             Teena<br />Shanell
           </h1>
 
-          <div className="vogue-text flex flex-col sm:flex-row items-start sm:items-center gap-5 md:gap-8">
+          <div className="vogue-text flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5 md:gap-8">
             <Link
               href="/#portfolio"
-              className="px-6 sm:px-8 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full font-montserrat text-[10px] tracking-widest uppercase text-white hover:bg-gold hover:border-gold transition-all duration-500 active:scale-95"
+              className="flex min-h-11 w-full items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 py-3 font-montserrat text-[10px] uppercase tracking-[0.28em] text-white backdrop-blur-md transition-all duration-500 hover:border-gold hover:bg-gold active:scale-95 sm:min-h-0 sm:w-auto sm:px-8 sm:tracking-widest"
             >
               View Portfolio
             </Link>
@@ -73,7 +77,7 @@ export default function HeroVogueFull() {
       </div>
 
       {/* 3. MOBILE BOTTOM BAR */}
-      <div className="absolute bottom-5 right-5 z-20 flex items-center gap-3 md:hidden pointer-events-none">
+      <div className="pointer-events-none absolute bottom-5 right-5 z-20 flex items-center gap-3 md:hidden">
         <p className="font-montserrat text-[8px] tracking-[0.4em] uppercase text-white/50">
           Available
         </p>

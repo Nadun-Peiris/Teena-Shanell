@@ -38,7 +38,7 @@ export default function ScreenWork() {
   return (
     <section 
       ref={containerRef} 
-      className="relative w-full bg-[#0A0A0A] text-white py-24 sm:py-32 md:py-40"
+      className="relative w-full bg-[#0A0A0A] py-20 text-white sm:py-32 md:py-40"
       id="screen-work"
     >
       <div className="mx-auto max-w-[1800px] px-5 sm:px-8 md:px-16 lg:px-24">

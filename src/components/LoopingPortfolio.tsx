@@ -73,20 +73,20 @@ export default function LoopingPortfolio() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full overflow-hidden bg-background py-24 text-foreground sm:py-32"
+      className="relative w-full overflow-hidden bg-background py-20 text-foreground sm:py-32"
       id="press"
     >
       <div className="mx-auto max-w-[1800px] px-5 sm:px-8 md:px-16 lg:px-24">
-        <div className="looping-portfolio-header mb-12 flex flex-col gap-10 md:mb-20 md:flex-row md:items-end md:justify-between">
-          <div>
-            <h2 className="font-playfair text-5xl uppercase leading-none tracking-tighter md:text-7xl lg:text-8xl">
+        <div className="looping-portfolio-header mb-10 flex flex-col gap-6 text-center md:mb-20 md:flex-row md:items-end md:justify-between md:text-left">
+          <div className="mx-auto md:mx-0">
+            <h2 className="font-playfair text-4xl uppercase leading-none tracking-tighter sm:text-5xl md:text-7xl lg:text-8xl">
               Visual
               <br className="hidden md:block" /> Diary
             </h2>
           </div>
 
-          <div className="max-w-sm">
-            <p className="font-montserrat text-[10px] uppercase tracking-[0.3em] text-foreground/50 md:text-xs">
+          <div className="mx-auto max-w-xs md:mx-0 md:max-w-sm">
+            <p className="font-montserrat text-[9px] uppercase tracking-[0.24em] leading-relaxed text-foreground/50 sm:text-[10px] sm:tracking-[0.3em] md:text-xs">
               A flowing edit of signature frames, editorial moods, and luminous moments drawn from the world of Teena Shanell.
             </p>
           </div>
@@ -94,35 +94,35 @@ export default function LoopingPortfolio() {
       </div>
 
       <div ref={contentRef} className="w-full">
-        <div className="space-y-4 pb-12 sm:space-y-8">
-          <div className="carousel-marquee flex w-max gap-4 px-5 sm:gap-8 sm:px-8 md:px-16 lg:px-24 [transform:translate3d(0,0,0)]">
+        <div className="space-y-3 pb-8 sm:space-y-8 sm:pb-12">
+          <div className="carousel-marquee flex w-max gap-3 px-5 sm:gap-8 sm:px-8 md:px-16 lg:px-24 [transform:translate3d(0,0,0)]">
             {FIRST_ROW_LOOP.map((item, index) => (
               <div
                 key={`row-one-${item.id}-${index}`}
-                className="group relative aspect-[3/4] w-[62vw] flex-none overflow-hidden rounded-sm bg-foreground/5 will-change-transform sm:w-[38vw] md:w-[26vw] lg:w-[20vw]"
+                className="group relative aspect-[3/4] w-[44vw] flex-none overflow-hidden rounded-sm bg-foreground/5 will-change-transform sm:w-[38vw] md:w-[26vw] lg:w-[20vw]"
               >
                 <Image
                   src={item.src}
                   alt={`Visual diary image ${item.id}`}
                   fill
-                  sizes="(max-width: 640px) 62vw, (max-width: 768px) 38vw, (max-width: 1024px) 26vw, 20vw"
+                  sizes="(max-width: 640px) 44vw, (max-width: 768px) 38vw, (max-width: 1024px) 26vw, 20vw"
                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
               </div>
             ))}
           </div>
 
-          <div className="carousel-marquee-reverse flex w-max gap-4 px-5 sm:gap-8 sm:px-8 md:px-16 lg:px-24 [transform:translate3d(0,0,0)]">
+          <div className="carousel-marquee-reverse flex w-max gap-3 px-5 sm:gap-8 sm:px-8 md:px-16 lg:px-24 [transform:translate3d(0,0,0)]">
             {SECOND_ROW_LOOP.map((item, index) => (
               <div
                 key={`row-two-${item.id}-${index}`}
-                className="group relative aspect-[3/4] w-[62vw] flex-none overflow-hidden rounded-sm bg-foreground/5 will-change-transform sm:w-[38vw] md:w-[26vw] lg:w-[20vw]"
+                className="group relative aspect-[3/4] w-[44vw] flex-none overflow-hidden rounded-sm bg-foreground/5 will-change-transform sm:w-[38vw] md:w-[26vw] lg:w-[20vw]"
               >
                 <Image
                   src={item.src}
                   alt={`Visual diary image ${item.id}`}
                   fill
-                  sizes="(max-width: 640px) 62vw, (max-width: 768px) 38vw, (max-width: 1024px) 26vw, 20vw"
+                  sizes="(max-width: 640px) 44vw, (max-width: 768px) 38vw, (max-width: 1024px) 26vw, 20vw"
                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
               </div>

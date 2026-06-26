@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -89,12 +90,12 @@ export default function PortfolioGrid() {
 
   const PortfolioCard = ({ item }: { item: PortfolioItem }) => (
     <div className="group relative overflow-hidden rounded-sm bg-foreground/5 cursor-pointer w-full h-full transform-gpu will-change-transform">
-      <img
+      <Image
         src={item.src}
-        // 3. Added decoding="async" for smoother scrolling and loading
-        decoding="async"
-        loading="lazy"
-        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 will-change-transform"
+        alt={`${item.category} portfolio image ${item.id}`}
+        fill
+        sizes="(max-width: 640px) 85vw, (max-width: 768px) 50vw, (max-width: 1024px) 35vw, 28vw"
+        className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105 will-change-transform"
       />
     </div>
   );
@@ -102,7 +103,7 @@ export default function PortfolioGrid() {
   return (
     <section 
       ref={containerRef} 
-      className="relative w-full bg-background text-foreground py-24 sm:py-32 overflow-hidden"
+      className="relative w-full overflow-hidden bg-background py-20 text-foreground sm:py-32"
       id="portfolio"
     >
       <div className="mx-auto max-w-[1800px] px-5 sm:px-8 md:px-16 lg:px-24">
