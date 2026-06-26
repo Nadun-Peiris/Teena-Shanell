@@ -3,7 +3,7 @@ import HeroVogueFull from "@/components/Hero";
 import Digitals from "@/components/Digitals";
 import PortfolioGrid from "@/components/PortfolioGrid";
 import ScreenWork from "@/components/ScreenWork";
-import Press from "@/components/Press";
+import LoopingPortfolio from "@/components/LoopingPortfolio";
 import About from "@/components/About";
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
       <Digitals />
       <PortfolioGrid />
       <ScreenWork />
-      <Press />
+      <LoopingPortfolio />
       <About />
     </main>
   );

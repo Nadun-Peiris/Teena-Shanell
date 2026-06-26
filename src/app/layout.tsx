@@ -18,7 +18,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Teena Shanell | Portfolio",
+  title: "Teena Shanell | Acctress, Model & Fashion Muse",
   description: "Professional Fashion Muse",
 };
 

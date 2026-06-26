@@ -42,7 +42,7 @@ export default function HeroVogueFull() {
         {/* Updated path to /hero.png for Next.js public folder */}
         <img
           ref={imageRef}
-          src="/hero.png"
+          src="/hero.webp"
           alt="Teena Shanell"
           className="w-full h-full object-cover object-[50%_20%] grayscale-[10%]"
         />

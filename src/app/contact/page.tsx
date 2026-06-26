@@ -1,11 +1,13 @@
 "use client";
 
-import { useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 export default function ContactPage() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   useGSAP(() => {
     const tl = gsap.timeline();
@@ -25,6 +27,39 @@ export default function ContactPage() {
     );
   }, []);
 
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setIsSubmitting(true);
+    setStatus(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to send your request right now.");
+      }
+
+      form.reset();
+      setStatus({ type: "success", message: "Your request has been sent." });
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message: error instanceof Error ? error.message : "Unable to send your request right now.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <main ref={containerRef} className="min-h-screen bg-background text-foreground pt-32 md:pt-48 pb-24">
       <div className="mx-auto max-w-[1800px] px-5 sm:px-8 md:px-16 lg:px-24">
@@ -42,24 +77,11 @@ export default function ContactPage() {
                 <span className="italic font-light text-foreground/70">Connect</span>
               </h1>
               <p className="contact-text font-montserrat text-sm md:text-base leading-relaxed text-foreground/60 max-w-md">
-                For editorial bookings, commercial campaigns, film casting, or press inquiries, please submit the form or contact management directly.
+                For editorial bookings, commercial campaigns, film casting, or press inquiries, please submit the form below.
               </p>
             </div>
 
-            {/* Direct Contact Details */}
             <div className="flex flex-col sm:flex-row gap-10 sm:gap-20 border-t border-foreground/10 pt-10 contact-text">
-              <div className="flex flex-col gap-3">
-                <p className="font-montserrat text-[9px] uppercase tracking-[0.4em] text-foreground/40">
-                  Management
-                </p>
-                <a href="mailto:mgmt@teenashanell.com" className="font-montserrat text-[11px] uppercase tracking-widest text-foreground hover:text-gold transition-colors">
-                  mgmt@teenashanell.com
-                </a>
-                <a href="tel:+94770000000" className="font-montserrat text-[11px] uppercase tracking-widest text-foreground hover:text-gold transition-colors">
-                  +94 77 000 0000
-                </a>
-              </div>
-
               <div className="flex flex-col gap-3">
                 <p className="font-montserrat text-[9px] uppercase tracking-[0.4em] text-foreground/40">
                   Location
@@ -76,13 +98,14 @@ export default function ContactPage() {
 
           {/* RIGHT COLUMN: Minimalist Form */}
           <div className="w-full lg:w-1/2 lg:pl-10 xl:pl-20">
-            <form className="flex flex-col gap-8 md:gap-12" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex flex-col gap-8 md:gap-12" onSubmit={handleSubmit}>
               
               <div className="flex flex-col md:flex-row gap-8 md:gap-10">
                 <div className="w-full form-element relative group">
                   <input 
                     type="text" 
                     id="firstName"
+                    name="firstName"
                     required
                     className="w-full bg-transparent border-b border-foreground/20 py-4 font-montserrat text-xs uppercase tracking-widest text-foreground outline-none transition-colors focus:border-gold peer placeholder-transparent"
                     placeholder="First Name"
@@ -96,6 +119,7 @@ export default function ContactPage() {
                   <input 
                     type="text" 
                     id="lastName"
+                    name="lastName"
                     required
                     className="w-full bg-transparent border-b border-foreground/20 py-4 font-montserrat text-xs uppercase tracking-widest text-foreground outline-none transition-colors focus:border-gold peer placeholder-transparent"
                     placeholder="Last Name"
@@ -110,8 +134,9 @@ export default function ContactPage() {
                 <input 
                   type="email" 
                   id="email"
+                  name="email"
                   required
-                  className="w-full bg-transparent border-b border-foreground/20 py-4 font-montserrat text-xs uppercase tracking-widest text-foreground outline-none transition-colors focus:border-gold peer placeholder-transparent"
+                  className="w-full bg-transparent border-b border-foreground/20 py-4 font-montserrat text-xs tracking-widest text-foreground outline-none transition-colors focus:border-gold peer placeholder-transparent"
                   placeholder="Email Address"
                 />
                 <label htmlFor="email" className="absolute left-0 top-4 font-montserrat text-[10px] uppercase tracking-widest text-foreground/40 transition-all peer-focus:-top-4 peer-focus:text-[8px] peer-focus:text-gold peer-valid:-top-4 peer-valid:text-[8px]">
@@ -120,8 +145,23 @@ export default function ContactPage() {
               </div>
 
               <div className="w-full form-element relative group">
+                <input 
+                  type="text" 
+                  id="company"
+                  name="company"
+                  required
+                  className="w-full bg-transparent border-b border-foreground/20 py-4 font-montserrat text-xs uppercase tracking-widest text-foreground outline-none transition-colors focus:border-gold peer placeholder-transparent"
+                  placeholder="Company or Agency"
+                />
+                <label htmlFor="company" className="absolute left-0 top-4 font-montserrat text-[10px] uppercase tracking-widest text-foreground/40 transition-all peer-focus:-top-4 peer-focus:text-[8px] peer-focus:text-gold peer-valid:-top-4 peer-valid:text-[8px]">
+                  Company or Agency
+                </label>
+              </div>
+
+              <div className="w-full form-element relative group">
                 <select 
                   id="inquiryType"
+                  name="inquiryType"
                   required
                   defaultValue=""
                   className="w-full bg-transparent border-b border-foreground/20 py-4 font-montserrat text-xs uppercase tracking-widest text-foreground outline-none transition-colors focus:border-gold cursor-pointer appearance-none"
@@ -142,6 +182,7 @@ export default function ContactPage() {
               <div className="w-full form-element relative group h-40">
                 <textarea 
                   id="message"
+                  name="message"
                   required
                   className="w-full h-full resize-none bg-transparent border-b border-foreground/20 py-4 font-montserrat text-xs uppercase tracking-widest text-foreground outline-none transition-colors focus:border-gold peer placeholder-transparent"
                   placeholder="Project Details"
@@ -151,13 +192,24 @@ export default function ContactPage() {
                 </label>
               </div>
 
+              {status ? (
+                <p
+                  className={`form-element text-[10px] uppercase tracking-[0.3em] ${
+                    status.type === "success" ? "text-gold" : "text-red-400"
+                  }`}
+                >
+                  {status.message}
+                </p>
+              ) : null}
+
               <div className="form-element mt-4 flex justify-end">
                 <button 
                   type="submit"
+                  disabled={isSubmitting}
                   className="group flex items-center gap-4 cursor-pointer focus:outline-none"
                 >
                   <span className="font-montserrat text-[10px] uppercase tracking-[0.5em] text-foreground transition-colors group-hover:text-gold">
-                    Submit Request
+                    {isSubmitting ? "Sending..." : "Submit Request"}
                   </span>
                   <div className="w-12 h-[1px] bg-foreground transition-all duration-500 group-hover:w-20 group-hover:bg-gold" />
                 </button>

@@ -5,7 +5,8 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { FaInstagram, FaFacebookF, FaYoutube, FaImdb } from "react-icons/fa6";
+import { FaFacebookF, FaImdb, FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa6";
+import { SOCIAL_LINKS } from "@/lib/socialLinks";
 
 // --- Types & Globals ---
 type LenisLike = {
@@ -36,12 +37,13 @@ const NAV_LINKS = [
   { name: "About", href: "/#about" },
 ];
 
-const SOCIAL_LINKS = [
-  { name: "Instagram", href: "#", icon: <FaInstagram className="w-5 h-5 sm:w-6 sm:h-6" /> },
-  { name: "Facebook", href: "#", icon: <FaFacebookF className="w-4 h-4 sm:w-5 sm:h-5" /> },
-  { name: "YouTube", href: "#", icon: <FaYoutube className="w-5 h-5 sm:w-6 sm:h-6" /> },
-  { name: "IMDb", href: "#", icon: <FaImdb className="w-6 h-6 sm:w-7 sm:h-7" /> },
-];
+const SOCIAL_ICONS = {
+  YouTube: <FaYoutube className="w-5 h-5 sm:w-6 sm:h-6" />,
+  TikTok: <FaTiktok className="w-4 h-4 sm:w-5 sm:h-5" />,
+  Instagram: <FaInstagram className="w-5 h-5 sm:w-6 sm:h-6" />,
+  Facebook: <FaFacebookF className="w-4 h-4 sm:w-5 sm:h-5" />,
+  IMDb: <FaImdb className="w-6 h-6 sm:w-7 sm:h-7" />,
+} as const;
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -218,7 +220,7 @@ export default function Navbar() {
                       aria-label={link.name}
                       className="transition-all duration-300 hover:text-gold hover:-translate-y-1 hover:scale-110 block p-2 -m-2"
                     >
-                      {link.icon}
+                      {SOCIAL_ICONS[link.name]}
                     </a>
                   ))}
                 </div>

@@ -6,11 +6,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 const MEASUREMENTS = [
-  { label: "Height", value: "173cm" },
+  { label: "Height", value: "168cm" },
   { label: "Bust", value: "37\"" },
   { label: "Waist", value: "33\"" },
   { label: "Hips", value: "41.5\"" },
-  { label: "Shoe", value: "39 EU" },
+  { label: "Shoe", value: "37 EU" },
   { label: "Hair", value: "Dark Black" },
   { label: "Eyes", value: "Brown" },
 ];

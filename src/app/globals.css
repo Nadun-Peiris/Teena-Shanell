@@ -35,6 +35,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@keyframes carousel-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* Hide the default cursor on desktop for custom GSAP cursor */
 @media (pointer: fine) {
   body {
@@ -46,5 +56,27 @@ body {
 @layer utilities {
   .writing-vertical-rl {
     writing-mode: vertical-rl;
+  }
+
+  .carousel-marquee {
+    animation: carousel-marquee 64s linear infinite;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+  }
+
+  .carousel-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  .carousel-marquee-reverse {
+    animation: carousel-marquee 72s linear infinite reverse;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+  }
+
+  .carousel-marquee-reverse:hover {
+    animation-play-state: paused;
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { SOCIAL_LINKS } from "@/lib/socialLinks";
 
 type LenisLike = {
   stop?: () => void;
@@ -28,14 +29,6 @@ const EXPLORE_LINKS = [
   { name: "Press & Media", href: "/#press" },
   { name: "About", href: "/#about" },
   { name: "Booking", href: "/contact" },
-];
-
-// Updated to match the specific social platforms
-const SOCIAL_LINKS = [
-  { name: "Instagram", href: "#" },
-  { name: "Facebook", href: "#" },
-  { name: "YouTube", href: "#" },
-  { name: "IMDb", href: "#" },
 ];
 
 export default function Footer() {
@@ -101,6 +94,8 @@ export default function Footer() {
                   <a
                     key={item.name}
                     href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="font-montserrat text-[10px] uppercase tracking-[0.3em] text-white/60 transition-colors duration-300 hover:text-gold"
                   >
                     {item.name}
