@@ -62,17 +62,19 @@ export default function About() {
         <div className="flex flex-col md:flex-row gap-12 md:gap-20 lg:gap-32">
           
           {/* LEFT COLUMN: Sticky Portrait */}
-          <div className="w-full md:w-1/2 lg:w-5/12 h-[60vh] md:h-[90vh] relative rounded-sm overflow-hidden md:sticky md:top-10">
-            <Image
-              ref={imageRef}
-              src="/about/img1.webp"
-              alt="Teena Shanell Portrait"
-              fill
-              sizes="(max-width: 768px) 100vw, 42vw"
-              className="h-full w-full object-cover grayscale-[10%]"
-            />
-            {/* Elegant inner border */}
-            <div className="absolute inset-4 border border-white/20 pointer-events-none" />
+          <div className="w-full md:w-1/2 lg:w-5/12 h-[60vh] md:h-[90vh] md:sticky md:top-10">
+            <div className="relative h-full w-full overflow-hidden rounded-sm">
+              <Image
+                ref={imageRef}
+                src="/about/img1.webp"
+                alt="Teena Shanell Portrait"
+                fill
+                sizes="(max-width: 768px) 100vw, 42vw"
+                className="h-full w-full object-cover grayscale-[10%]"
+              />
+              {/* Elegant inner border */}
+              <div className="pointer-events-none absolute inset-4 border border-white/20" />
+            </div>
           </div>
 
           {/* RIGHT COLUMN: Scrolling Biography */}

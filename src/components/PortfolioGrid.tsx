@@ -88,12 +88,19 @@ export default function PortfolioGrid() {
     });
   };
 
-  const PortfolioCard = ({ item }: { item: PortfolioItem }) => (
+  const PortfolioCard = ({
+    item,
+    loading = "lazy",
+  }: {
+    item: PortfolioItem;
+    loading?: "eager" | "lazy";
+  }) => (
     <div className="group relative overflow-hidden rounded-sm bg-foreground/5 cursor-pointer w-full h-full transform-gpu will-change-transform">
       <Image
         src={item.src}
         alt={`${item.category} portfolio image ${item.id}`}
         fill
+        loading={loading}
         sizes="(max-width: 640px) 85vw, (max-width: 768px) 50vw, (max-width: 1024px) 35vw, 28vw"
         className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105 will-change-transform"
       />
@@ -145,7 +152,10 @@ export default function PortfolioGrid() {
                 key={item.id} 
                 className="flex-none w-[85vw] sm:w-[50vw] md:w-[35vw] lg:w-[28vw] aspect-[3/4] snap-center"
               >
-                <PortfolioCard item={item} />
+                <PortfolioCard
+                  item={item}
+                  loading={item.id === 1 ? "eager" : "lazy"}
+                />
               </div>
             ))}
             <div className="flex-none w-5 sm:w-8 md:w-16 lg:w-24" />
@@ -155,7 +165,10 @@ export default function PortfolioGrid() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredItems.map((item) => (
                 <div key={item.id} className="w-full aspect-[3/4]">
-                  <PortfolioCard item={item} />
+                  <PortfolioCard
+                    item={item}
+                    loading={item.id === 1 ? "eager" : "lazy"}
+                  />
                 </div>
               ))}
             </div>
