@@ -6,41 +6,44 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-const LOOPING_ITEMS = [
-  { id: 1, src: "/looping-portfolio/17.webp" },
-  { id: 2, src: "/looping-portfolio/3.webp" },
-  { id: 3, src: "/looping-portfolio/24.webp" },
-  { id: 4, src: "/looping-portfolio/8.webp" },
-  { id: 5, src: "/looping-portfolio/29.webp" },
-  { id: 6, src: "/looping-portfolio/1.webp" },
-  { id: 7, src: "/looping-portfolio/12.webp" },
-  { id: 8, src: "/looping-portfolio/26.webp" },
-  { id: 9, src: "/looping-portfolio/5.webp" },
-  { id: 10, src: "/looping-portfolio/20.webp" },
-  { id: 11, src: "/looping-portfolio/9.webp" },
-  { id: 12, src: "/looping-portfolio/30.webp" },
-  { id: 13, src: "/looping-portfolio/6.webp" },
-  { id: 14, src: "/looping-portfolio/22.webp" },
-  { id: 15, src: "/looping-portfolio/14%20(1).webp" },
-  { id: 16, src: "/looping-portfolio/2.webp" },
-  { id: 17, src: "/looping-portfolio/27.webp" },
-  { id: 18, src: "/looping-portfolio/11.webp" },
-  { id: 19, src: "/looping-portfolio/19.webp" },
-  { id: 20, src: "/looping-portfolio/4.webp" },
-  { id: 21, src: "/looping-portfolio/25.webp" },
-  { id: 22, src: "/looping-portfolio/7.webp" },
-  { id: 23, src: "/looping-portfolio/16.webp" },
-  { id: 24, src: "/looping-portfolio/28.webp" },
-  { id: 25, src: "/looping-portfolio/10.webp" },
-  { id: 26, src: "/looping-portfolio/21.webp" },
-  { id: 27, src: "/looping-portfolio/13.webp" },
-  { id: 28, src: "/looping-portfolio/18.webp" },
-  { id: 29, src: "/looping-portfolio/23.webp" },
-  { id: 30, src: "/looping-portfolio/15.webp" },
+const LOOPING_IMAGE_NAMES = [
+  "17.webp",
+  "3.webp",
+  "24.webp",
+  "8.webp",
+  "29.webp",
+  "1.webp",
+  "12.webp",
+  "26.webp",
+  "20.webp",
+  "9.webp",
+  "30.webp",
+  "6.webp",
+  "22.webp",
+  "2.webp",
+  "27.webp",
+  "11.webp",
+  "19.webp",
+  "4.webp",
+  "25.webp",
+  "7.webp",
+  "16.webp",
+  "28.webp",
+  "10.webp",
+  "21.webp",
+  "13.webp",
+  "18.webp",
+  "23.webp",
 ] as const;
 
-const FIRST_ROW_ITEMS = LOOPING_ITEMS.slice(0, 15);
-const SECOND_ROW_ITEMS = LOOPING_ITEMS.slice(15);
+const LOOPING_ITEMS = LOOPING_IMAGE_NAMES.map((src, index) => ({
+  id: index + 1,
+  src: `/looping-portfolio/${src}`,
+}));
+
+const midpoint = Math.ceil(LOOPING_ITEMS.length / 2);
+const FIRST_ROW_ITEMS = LOOPING_ITEMS.slice(0, midpoint);
+const SECOND_ROW_ITEMS = LOOPING_ITEMS.slice(midpoint);
 const FIRST_ROW_LOOP = [...FIRST_ROW_ITEMS, ...FIRST_ROW_ITEMS];
 const SECOND_ROW_LOOP = [...SECOND_ROW_ITEMS, ...SECOND_ROW_ITEMS];
 
